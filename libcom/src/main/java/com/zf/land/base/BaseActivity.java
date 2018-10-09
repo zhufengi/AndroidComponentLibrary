@@ -26,20 +26,14 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBusUtils.getInstance().register(this, new EventbusMessageCallback() {
-            @Override
-            public void onMessageCallback(Object event) {
-                Log.i(TAG,event.toString());
-            }
-        });
-
+        EventBusUtils.getInstance().register(this);
+    }
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent messageEvent){
+        Log.i(TAG,"messageEvent :"+messageEvent.getMessage());
     }
 
-    @Subscribe
-    public Object onEventbusMessage(MessageEvent event){
-        Object o = EventBusUtils.getInstance().onMessageEvent(event);
-        return o;
-    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

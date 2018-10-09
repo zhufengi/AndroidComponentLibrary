@@ -18,7 +18,7 @@ public class EventBusUtils {
     private final String TAG = "EventBusUtils";
     private static EventBusUtils instance;
     private EventBus eventBus ;
-    private EventbusMessageCallback eventbusMessageCallback;
+    private EventbusMessageCallback callback;
     private Object object = new Object();
 
     public  static EventBusUtils getInstance(){
@@ -43,8 +43,7 @@ public class EventBusUtils {
      * eventbus 订阅
      * @param context
      */
-    public void register(Context context,EventbusMessageCallback callback){
-        this.eventbusMessageCallback = callback;
+    public void register(Context context){
         EventBus.getDefault().register(context);
     }
 
@@ -122,11 +121,16 @@ public class EventBusUtils {
         eventBus.postSticky(event);
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.POSTING)
-    public Object onMessageEvent(MessageEvent event){
-        Log.i(TAG,"onMessageEvent :"+event.getMessage());
-        eventbusMessageCallback.onMessageCallback(object);
-        return object = event.getMessage();
-    }
+//    @Subscribe(sticky = true,threadMode = ThreadMode.POSTING)
+//    public Object onMessageEvent(MessageEvent event){
+//        Log.i(TAG,"onMessageEvent :"+event.getMessage());
+//        return event.getMessage();
+//    }
 
+//    public void getMessageEvent(EventbusMessageCallback callback){
+//        this.callback =callback;
+//        Object event = onMessageEvent(null);
+//        Log.i(TAG,"onMessageEvent :"+event.toString());
+//        callback.onMessageCallback(event.toString());
+//    }
 }

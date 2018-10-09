@@ -1,12 +1,11 @@
 package com.zf.acl;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.zf.land.base.BaseActivity;
-import com.zf.land.eventbus.EventBusUtils;
 import com.zf.land.eventbus.MessageEvent;
+
 
 public class SecondActivity extends BaseActivity {
 
@@ -19,11 +18,9 @@ public class SecondActivity extends BaseActivity {
 
     }
 
-
     @Override
-    public Object onEventbusMessage(MessageEvent event) {
-        Object ob=super.onEventbusMessage(event);
-        Log.i(TAG,ob.toString());
-        return super.onEventbusMessage(event);
+    public void onMessageEvent(MessageEvent messageEvent) {
+        super.onMessageEvent(messageEvent);
+        Log.i(TAG,"MainActivity123");
     }
 }
