@@ -121,16 +121,10 @@ public class EventBusUtils {
         eventBus.postSticky(event);
     }
 
-//    @Subscribe(sticky = true,threadMode = ThreadMode.POSTING)
-//    public Object onMessageEvent(MessageEvent event){
-//        Log.i(TAG,"onMessageEvent :"+event.getMessage());
-//        return event.getMessage();
-//    }
+    @Subscribe(sticky = true,threadMode = ThreadMode.POSTING)
+    public Object onMessageEvent(MessageEvent event){
+        Log.i(TAG,"onMessageEvent :"+event.getMessage());
+        return event.getMessage();
+    }
 
-//    public void getMessageEvent(EventbusMessageCallback callback){
-//        this.callback =callback;
-//        Object event = onMessageEvent(null);
-//        Log.i(TAG,"onMessageEvent :"+event.toString());
-//        callback.onMessageCallback(event.toString());
-//    }
 }

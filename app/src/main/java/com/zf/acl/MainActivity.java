@@ -20,8 +20,8 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onMessageEvent(MessageEvent messageEvent) {
-        super.onMessageEvent(messageEvent);
-        Log.i(TAG,"MainActivity123");
+    public Object onMessageEvent(MessageEvent messageEvent) {
+        Log.i(TAG,""+messageEvent.getMessage());
+        return super.onMessageEvent(messageEvent);
     }
 }

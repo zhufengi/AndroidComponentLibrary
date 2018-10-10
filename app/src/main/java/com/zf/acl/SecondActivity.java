@@ -15,12 +15,12 @@ public class SecondActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-
+//        EventBusUtils.getInstance().post(new MessageEvent("MainActivity123556"));
     }
 
     @Override
-    public void onMessageEvent(MessageEvent messageEvent) {
-        super.onMessageEvent(messageEvent);
-        Log.i(TAG,"MainActivity123");
+    public Object onMessageEvent(MessageEvent messageEvent) {
+        Log.i(TAG,""+messageEvent.getMessage());
+        return super.onMessageEvent(messageEvent);
     }
 }

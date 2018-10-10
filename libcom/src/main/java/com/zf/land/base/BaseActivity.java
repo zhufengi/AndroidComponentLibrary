@@ -27,10 +27,12 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBusUtils.getInstance().register(this);
+
     }
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent messageEvent){
-        Log.i(TAG,"messageEvent :"+messageEvent.getMessage());
+    @Subscribe
+    public Object onMessageEvent(MessageEvent messageEvent){
+        Log.i(TAG,""+messageEvent.getMessage());
+       return EventBusUtils.getInstance().onMessageEvent(messageEvent);
     }
 
 
