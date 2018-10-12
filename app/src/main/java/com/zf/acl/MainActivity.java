@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.zf.acl.rxjava.RxLearnCreate;
+import com.zf.acl.rxjava.RxLearnDefer;
 import com.zf.acl.rxjava.RxLearnFromArray;
 import com.zf.acl.rxjava.RxLearnFromCallable;
 import com.zf.acl.rxjava.RxLearnFromFuture;
+import com.zf.acl.rxjava.RxLearnFromIterable;
 import com.zf.acl.rxjava.RxLearnJust;
+import com.zf.acl.rxjava.RxLearnTimer;
 import com.zf.land.Logger;
 import com.zf.land.base.BaseActivity;
 import com.zf.land.eventbus.EventBusUtils;
@@ -25,8 +28,6 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity {
     private final String TAG = "MainActivity";
@@ -43,7 +44,9 @@ public class MainActivity extends BaseActivity {
         RxLearnFromArray.onRxLearnFromArray();
         RxLearnFromCallable.onRxLearnFromCallable();
         RxLearnFromFuture.onRxLearnFromFuture();
-
+        RxLearnFromIterable.onRxLearnFromIterable();
+        RxLearnDefer.onRxLearnDefer();
+        RxLearnTimer.onRxLearnTimer();
         testObservable();
     }
 
