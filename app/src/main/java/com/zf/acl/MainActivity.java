@@ -11,6 +11,8 @@ import com.zf.acl.rxjava.RxLearnFromArray;
 import com.zf.acl.rxjava.RxLearnFromCallable;
 import com.zf.acl.rxjava.RxLearnFromFuture;
 import com.zf.acl.rxjava.RxLearnFromIterable;
+import com.zf.acl.rxjava.RxLearnInterval;
+import com.zf.acl.rxjava.RxLearnIntervalRange;
 import com.zf.acl.rxjava.RxLearnJust;
 import com.zf.acl.rxjava.RxLearnTimer;
 import com.zf.land.Logger;
@@ -23,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -47,6 +50,8 @@ public class MainActivity extends BaseActivity {
         RxLearnFromIterable.onRxLearnFromIterable();
         RxLearnDefer.onRxLearnDefer();
         RxLearnTimer.onRxLearnTimer();
+        RxLearnInterval.onRxLearnInterval(3,2,TimeUnit.SECONDS);
+        RxLearnIntervalRange.onRxLearnIntervalRange(3,7,4,1,TimeUnit.SECONDS);
         testObservable();
     }
 
