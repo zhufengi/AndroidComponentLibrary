@@ -1,11 +1,11 @@
 package com.zf.acl;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.zf.acl.rxjava.RxLearnBuffer;
+import com.zf.acl.rxjava.RxLearnConcat;
+import com.zf.acl.rxjava.RxLearnConcatArray;
 import com.zf.acl.rxjava.RxLearnConcatMap;
 import com.zf.acl.rxjava.RxLearnCreate;
 import com.zf.acl.rxjava.RxLearnDefer;
@@ -25,16 +25,11 @@ import com.zf.acl.rxjava.RxLearnNever;
 import com.zf.acl.rxjava.RxLearnRangeLong;
 import com.zf.acl.rxjava.RxLearnScan;
 import com.zf.acl.rxjava.RxLearnTimer;
+import com.zf.acl.rxjava.RxLearnWindow;
 import com.zf.land.Logger;
 import com.zf.land.base.BaseActivity;
 import com.zf.land.eventbus.EventBusUtils;
 import com.zf.land.eventbus.MessageEvent;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -73,6 +68,9 @@ public class MainActivity extends BaseActivity {
         RxLearnBuffer.onRxLearnBuffer();
         RxLearnGroupBy.onRxLearnGroupBy();
         RxLearnScan.onRxLearnScan();
+        RxLearnConcat.onRxLearnConcat();
+        RxLearnConcatArray.onRxLearnConcatArray();
+        RxLearnWindow.onRxLearnWindow(3);
         testObservable();
     }
 
