@@ -5,6 +5,7 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.zf.acl.rxjava.RxLearnBuffer;
 import com.zf.acl.rxjava.RxLearnConcatMap;
 import com.zf.acl.rxjava.RxLearnCreate;
 import com.zf.acl.rxjava.RxLearnDefer;
@@ -15,12 +16,14 @@ import com.zf.acl.rxjava.RxLearnFromArray;
 import com.zf.acl.rxjava.RxLearnFromCallable;
 import com.zf.acl.rxjava.RxLearnFromFuture;
 import com.zf.acl.rxjava.RxLearnFromIterable;
+import com.zf.acl.rxjava.RxLearnGroupBy;
 import com.zf.acl.rxjava.RxLearnInterval;
 import com.zf.acl.rxjava.RxLearnIntervalRange;
 import com.zf.acl.rxjava.RxLearnJust;
 import com.zf.acl.rxjava.RxLearnMap;
 import com.zf.acl.rxjava.RxLearnNever;
 import com.zf.acl.rxjava.RxLearnRangeLong;
+import com.zf.acl.rxjava.RxLearnScan;
 import com.zf.acl.rxjava.RxLearnTimer;
 import com.zf.land.Logger;
 import com.zf.land.base.BaseActivity;
@@ -67,6 +70,9 @@ public class MainActivity extends BaseActivity {
         RxLearnMap.onRxLearnMap2(5);
         RxLearnFlatMap.onRxLearnFlatMap(5);
         RxLearnConcatMap.onRxLearnConcatMap(5);
+        RxLearnBuffer.onRxLearnBuffer();
+        RxLearnGroupBy.onRxLearnGroupBy();
+        RxLearnScan.onRxLearnScan();
         testObservable();
     }
 
