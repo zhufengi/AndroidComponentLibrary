@@ -4,8 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.zf.land.utils.WakeLock;
-
 public class WakeLockActivity extends AppCompatActivity {
 
     @Override
