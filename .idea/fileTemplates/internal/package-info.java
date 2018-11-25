@@ -1,4 +1,3 @@
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 /**
  * @author: ${USER}
  * @github: https://github.com/zhufengi
@@ -6,5 +5,4 @@
  * @description: ${NAME}
  */
 #parse("File Header.java")
-public enum ${NAME} {
-}
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end

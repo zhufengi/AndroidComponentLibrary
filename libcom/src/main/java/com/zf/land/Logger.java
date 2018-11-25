@@ -13,4 +13,8 @@ public class Logger {
     public static void log(String tag,String msg){
         Log.i(tag,"当前线程>"+Thread.currentThread().getName()+"<"+msg);
     }
+
+    public static void e(String tag,String msg){
+        Log.e(tag,"当前线程>"+Thread.currentThread().getName()+"<"+msg);
+    }
 }

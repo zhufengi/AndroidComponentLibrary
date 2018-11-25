@@ -1,8 +1,8 @@
 package com.zf.acl;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.zf.acl.rxjava.RxLearnBuffer;
 import com.zf.acl.rxjava.RxLearnCollect;
 import com.zf.acl.rxjava.RxLearnCombineLatest;
@@ -48,14 +48,10 @@ import com.zf.acl.rxjava.RxLearnZip;
 import com.zf.acl.rxjava.RxlearnDoOnLifecycle;
 import com.zf.land.Logger;
 import com.zf.land.base.BaseActivity;
-import com.zf.land.eventbus.EventBusUtils;
 import com.zf.land.eventbus.MessageEvent;
-import java.util.concurrent.TimeUnit;
+import com.zf.land.utils.AppConfigUtils;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends BaseActivity {
     private final String TAG = "MainActivity";
@@ -63,9 +59,23 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this,SecondActivity.class));
-        EventBusUtils.getInstance().postSticky(new MessageEvent("MainActivity123"));
+//        startActivity(new Intent(this,SecondActivity.class));
+//        EventBusUtils.getInstance().postSticky(new MessageEvent("MainActivity123"));
 
+//        onLearn();
+        String[] permissions = AppConfigUtils.getAppPermissions(this, "com.zf.acl");
+        AppConfigUtils.killProcesses(this,"com.zf.acl");
+        Logger.log("111",AppConfigUtils.getAppPermissions(this,"com.zf.acl")+"");
+
+    }
+
+    @Override
+    public Object onMessageEvent(MessageEvent messageEvent) {
+        Log.i(TAG,""+messageEvent.getMessage());
+        return super.onMessageEvent(messageEvent);
+    }
+
+    private void onLearn(){
         RxLearnCreate.onRxLearnCreate();
         RxLearnCreate.onRxLearnCreate2();
         RxLearnJust.onRxLearnJust();
@@ -111,24 +121,5 @@ public class MainActivity extends BaseActivity {
         RxlearnDoOnLifecycle.onRxlearnDoOnLifecycle();
         RxLearnDoOnTerminate.onRxLearnDoOnTerminate();
         RxLearnDoAfterTerminate.onRxLearnDoAfterTerminate();
-        testObservable();
-    }
-
-    @Override
-    public Object onMessageEvent(MessageEvent messageEvent) {
-        Log.i(TAG,""+messageEvent.getMessage());
-        return super.onMessageEvent(messageEvent);
-    }
-
-    private void testObservable(){
-        Observable observable = Observable.create(new ObservableOnSubscribe() {
-            @Override
-            public void subscribe(ObservableEmitter emitter) throws Exception {
-                emitter.onNext("啦啦啦啦啦啦啦啦");
-                Logger.log(TAG,"testObservable");
-            }
-        });
-        Observer observer = SecondActivity.testObserver();
-        observable.subscribe(observer);
     }
 }

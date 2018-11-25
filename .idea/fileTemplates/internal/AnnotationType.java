@@ -1,7 +1,7 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 /**
  * @author: ${USER}
- * @github: https://github.com/zhufengi 
+ * @github: https://github.com/zhufengi
  * @time: ${DATE}
  * @description: ${NAME}
  */
