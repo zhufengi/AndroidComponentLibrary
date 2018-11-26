@@ -1,6 +1,7 @@
 package com.zf.land.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -302,5 +303,18 @@ public class AppConfigUtils {
         return isSys;
     }
 
+    /**
+     * 启动app
+     * @param context
+     * @param packagename
+     */
+    public static void runApp(Context context, String packagename) {
+        if (context == null || StringUtils.isEmpty(packagename)){
+            Logger.e(TAG,"runApp "+nullException);
+            return;
+        }else {
+            context.startActivity(new Intent(context.getPackageManager().getLaunchIntentForPackage(packagename)));
+        }
 
+    }
 }

@@ -1,6 +1,12 @@
 package com.zf.land;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
+
+import com.zf.land.comm.root.SystemProperties;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -61,5 +67,57 @@ public class DevicesUtils {
             }
         }
         return true;
+    }
+
+    /**
+     * 获取AndroidID
+     * @param context
+     * @return
+     */
+    public static String getAndroidID(Context context) {
+        if (context == null){
+            return "";
+        }
+        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+
+    /**
+     * 获取设备IMSI
+     * @param context
+     * @return
+     */
+    public static String getIMSI(Context context) {
+        try {
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            //获取IMSI号
+            @SuppressLint("MissingPermission")
+            String imsi = telephonyManager.getSubscriberId();
+            if (null == imsi) {
+                imsi = "";
+            }
+            return imsi;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * 获得手机生产厂商的mode商标，大写
+     */
+    public static String getMobileModel() {
+        String model = SystemProperties.get("ro.product.model");
+        return model;
+    }
+
+    /**
+     * 判断是否平板设备
+     *
+     * @param context
+     * @return true:平板,false:手机
+     */
+    public static boolean isPadDevice(Context context) {
+        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >=
+                Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 }
