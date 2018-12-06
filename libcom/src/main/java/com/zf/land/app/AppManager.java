@@ -14,8 +14,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author wang.xiaotong 2018/12/6
- * App管理类
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/9/28
+ * @description: AppManager
  */
 public class AppManager {
 
