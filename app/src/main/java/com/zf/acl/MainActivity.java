@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
 
 //        onLearn();
         String[] permissions = AppConfigUtils.getAppPermissions(this, "com.zf.acl");
-        AppConfigUtils.killProcesses(this,"com.zf.acl");
+//        AppConfigUtils.killProcesses(this,"com.zf.acl");
         Logger.log("111",AppConfigUtils.getAppPermissions(this,"com.zf.acl")+"");
 
     }

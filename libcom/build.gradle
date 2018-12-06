@@ -39,4 +39,5 @@ dependencies {
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation project(':EventBus')
     implementation files('libs/commons-lang3-3.8.1.jar')
+    implementation 'com.dianping.android.sdk:logan:1.1.0'
 }

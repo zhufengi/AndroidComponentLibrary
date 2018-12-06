@@ -44,7 +44,9 @@ public class EventBusUtils {
      * @param context
      */
     public void register(Context context){
-        EventBus.getDefault().register(context);
+        if (!eventBus.isRegistered(context)){
+            EventBus.getDefault().register(context);
+        }
     }
 
     /**
