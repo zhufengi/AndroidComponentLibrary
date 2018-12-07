@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">libcom</string>
+    <string name="string_network_disconnect_hint">当前网络不可用，请设置网络!</string>
+    <string name="string_network_disconnect">网络超时</string>
+    <string name="string_network_disconnect_tip">请检测网络设置</string>
+    <string name="string_network_set">设置</string>
 </resources>

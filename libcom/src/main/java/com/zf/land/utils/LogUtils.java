@@ -50,9 +50,12 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-
 /**
- *
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/11/22
+ * @description: LogUtils
+ *  日志工具类
  */
 public final class LogUtils {
 
