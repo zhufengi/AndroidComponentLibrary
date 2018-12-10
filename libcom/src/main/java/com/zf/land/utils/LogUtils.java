@@ -480,7 +480,10 @@ public final class LogUtils {
             return;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(time)
+        int pid = android.os.Process.myPid();
+        sb.append(date)
+                .append(pid)
+                .append(time)
                 .append(T[type - V])
                 .append("/")
                 .append(tag)
