@@ -1,1 +1,1 @@
-include ':app', ':libcom', ':EventBus'
+include ':app', ':libcom'
