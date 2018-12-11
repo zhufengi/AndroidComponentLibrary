@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -26,7 +28,7 @@ public class RxLearnFromArray {
 
                     @Override
                     public void onNext(String ints) {
-                        Logger.log(TAG," ints:"+ints);
+                        Log.d(TAG," ints:"+ints);
                     }
 
                     @Override

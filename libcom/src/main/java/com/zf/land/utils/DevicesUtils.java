@@ -1,42 +1,31 @@
-package com.zf.land;
+package com.zf.land.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
-
-import com.zf.land.comm.root.SystemProperties;
-
+import android.util.Log;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * @author: Administrator
  * @github: https://github.com/zhufengi
- * @time: 2018/11/25 0025
+ * @time: 2018/12/11
  * @description: DevicesUtils
  */
 public class DevicesUtils {
+
     private static String TAG = "DevicesUtils";
 
-    /**
-     * 是否root
-     * @return
-     */
-    public static boolean isRooted() {
-        String suSearchPaths[] = {"/system/bin/", "/system/xbin/", "/system/sbin/", "/sbin/", "/vendor/bin/"};
-        File file = null;
-        boolean flag1 = false;
-        for (String suSearchPath : suSearchPaths) {
-            file = new File(suSearchPath + "su");
-            if (file.isFile() && file.exists()) {
-                flag1 = true;
-                break;
-            }
-        }
-        return flag1;
+    private DevicesUtils() {
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
+
     /**
      * 获取root权限
      * @param context
@@ -119,5 +108,77 @@ public class DevicesUtils {
     public static boolean isPadDevice(Context context) {
         return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >=
                 Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+    /**
+     * 是否root
+     * @return
+     */
+    public static boolean isRooted() {
+        String suSearchPaths[] = {"/system/bin/", "/system/xbin/", "/system/sbin/", "/sbin/", "/vendor/bin/"};
+        File file = null;
+        boolean flag1 = false;
+        for (String suSearchPath : suSearchPaths) {
+            file = new File(suSearchPath + "su");
+            if (file.isFile() && file.exists()) {
+                flag1 = true;
+                break;
+            }
+        }
+        return flag1;
+    }
+
+    /**
+     * 是否root
+     * @return
+     */
+    public static boolean isDeviceRooted() {
+        if("1".equals(SystemProperties.get("ro.debuggable"))){
+            return  true;
+        }
+        if (isRoot()){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    private static boolean isRoot() {
+        String binPath = "/system/bin/su";
+        String xBinPath = "/system/xbin/su";
+        if (new File(binPath).exists() && isExecutable(binPath))
+            return true;
+        if (new File(xBinPath).exists() && isExecutable(xBinPath))
+            return true;
+        return false;
+    }
+
+    /**
+     * @param filePath
+     * @return
+     */
+    private static boolean isExecutable(String filePath) {
+        Process p = null;
+        try {
+            p = Runtime.getRuntime().exec("ls -l " + filePath);
+            // 获取返回内容
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    p.getInputStream()));
+            String str = in.readLine();
+            Log.i(TAG, str);
+            if (str != null && str.length() >= 4) {
+                char flag = str.charAt(3);
+                if (flag == 's' || flag == 'x')
+                    return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+            if(p!=null){
+                p.destroy();
+            }
+        }
+        return false;
     }
 }

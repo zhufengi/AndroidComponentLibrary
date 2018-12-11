@@ -13,7 +13,7 @@ import android.view.WindowManager;
 public class ScreenUtils {
 
     private ScreenUtils(){
-        throw new IllegalStateException("you can't instantiate me!");
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**

@@ -22,16 +22,15 @@ import java.io.File;
 public class CameraUtils {
 
     public static Uri takePhotoUri = null;
-
     public static Uri albumPhotonUri = null;
-
     public static final int CODE_TAKE_PHOTO = 0;
-
     public static final int CODE_TAKE_PHOTO_ZOOM = 1;
-
     public static final int CODE_ALBUM_CHOOSE = 2;
-
     public static final int CODE_ALBUM_CHOOSE_ZOOM = 3;
+
+    private CameraUtils() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      * 调用相机拍照
@@ -91,19 +90,6 @@ public class CameraUtils {
      */
     public static void albumChooseZoom(Activity activity, Uri uri) {
         if (null != uri) {
-
-            /*String photoName = System.currentTimeMillis() + ".jpg";
-            File file = new File(Environment.getExternalStorageDirectory(), photoName);
-            try {
-                if (file.exists()) {
-                    file.delete();
-                }
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            albumPhotonUri = Uri.fromFile(file);*/
-
             Intent intent = new Intent("com.android.camera.action.CROP");
             intent.setDataAndType(uri, "image/*");
             intent.putExtra("crop", "true");

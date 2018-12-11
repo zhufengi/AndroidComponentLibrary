@@ -15,25 +15,34 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
- * 在Application 中调用
- * CrashHandlerUtil.getInstance().init(this);
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/12/9
+ * @description: CrashHandlerUtils
  */
+
 public class CrashHandlerUtils implements Thread.UncaughtExceptionHandler {
 
-    //系统默认的UncaughtException处理类
+
+    /**系统默认的UncaughtException处理类*/
     private Thread.UncaughtExceptionHandler mDefaultHandler;
-    //CrashHandler实例
+    /**CrashHandler实例*/
     private static CrashHandlerUtils INSTANCE = new CrashHandlerUtils();
-    //程序的Context对象
+    /**程序的Context对象*/
     private Context mContext;
-    //用来存储设备信息和异常信息
+    /**用来存储设备信息和异常信息*/
     private Map<String, String> infos = new HashMap<>();
-    private String crashTip = "很抱歉，程序出现异常，即将退出！";
+    /**很抱歉，程序出现异常，即将退出！*/
+    private String crashTip = "sorry App will exit!";
+
+    private CrashHandlerUtils() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     public String getCrashTip() {
         return crashTip;
@@ -43,15 +52,10 @@ public class CrashHandlerUtils implements Thread.UncaughtExceptionHandler {
         this.crashTip = crashTip;
     }
 
-    /**
-     * 保证只有一个CrashHandler实例
-     */
-    private CrashHandlerUtils() {
-    }
 
     /**
      * 获取CrashHandler实例 ,单例模式
-     *
+     * 建议在Application 中调用
      * @return 单例
      */
     public static CrashHandlerUtils getInstance() {
@@ -88,7 +92,8 @@ public class CrashHandlerUtils implements Thread.UncaughtExceptionHandler {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //TODO退出程序
+            //退出程序
+            ActivityManagerUtils.killPidExitApp();
         }
     }
 
@@ -174,11 +179,10 @@ public class CrashHandlerUtils implements Thread.UncaughtExceptionHandler {
         sb.append(result);
         try {
             long timestamp = System.currentTimeMillis();
-            String fileName = "";
-//            String fileName = "crash-" + XDateUtils.getCurrentDate() + "-" + timestamp + ".XPrintUtils";
+            String fileName = "crash-" + new Date() + "-" + timestamp + ".XPrintUtils";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 String path = Environment.getExternalStorageDirectory().getPath() + "/crash/";
-//                XPrintUtils.d("path=" + path);
+                LogUtils.i("path=" + path);
                 File dir = new File(path);
                 if (!dir.exists()) {
                     dir.mkdirs();

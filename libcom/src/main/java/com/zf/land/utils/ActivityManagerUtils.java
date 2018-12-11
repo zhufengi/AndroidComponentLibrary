@@ -28,7 +28,9 @@ public class ActivityManagerUtils {
     /**当前在前台的 Activity*/
     private static Activity mCurrentActivity;
 
-    public ActivityManagerUtils(){}
+    private ActivityManagerUtils(){
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      * 返回一个存储所有未销毁的 {@link Activity} 的集合
@@ -70,7 +72,7 @@ public class ActivityManagerUtils {
      */
     public static Activity getTopActivity() {
         if (mActivityStack == null) {
-//            Timber.tag(TAG).w("mActivityStack == null when getTopActivity()");
+            LogUtils.w(TAG,"mActivityStack == null when getTopActivity()");
             return null;
         }
         return mActivityStack.size() > 0 ? mActivityStack.get(mActivityStack.size() - 1) : null;
@@ -109,7 +111,7 @@ public class ActivityManagerUtils {
      */
     public static void removeActivity(Activity activity) {
         if (mActivityStack == null) {
-//            Timber.tag(TAG).w("mActivityStack == null when removeActivity(Activity)");
+            LogUtils.w(TAG,"mActivityStack == null when removeActivity(Activity)");
             return;
         }
         synchronized (ActivityManagerUtils.class) {
@@ -126,7 +128,7 @@ public class ActivityManagerUtils {
      */
     public static void killActivity(Class<?> activityClass) {
         if (mActivityStack == null) {
-//            Timber.tag(TAG).w("mActivityStack == null when killActivity(Class)");
+            LogUtils.w(TAG,"mActivityStack == null when killActivity(Class)");
             return;
         }
         synchronized (ActivityManagerUtils.class) {
@@ -150,7 +152,7 @@ public class ActivityManagerUtils {
      */
     public static boolean activityInstanceIsLive(Activity activity) {
         if (mActivityStack == null) {
-//            Timber.tag(TAG).w("mActivityStack == null when activityInstanceIsLive(Activity)");
+            LogUtils.w(TAG,"mActivityStack == null when activityInstanceIsLive(Activity)");
             return false;
         }
         return mActivityStack.contains(activity);
@@ -164,7 +166,7 @@ public class ActivityManagerUtils {
      */
     public static boolean activityClassIsLive(Class<?> activityClass) {
         if (mActivityStack == null) {
-//            Timber.tag(TAG).w("mActivityStack == null when activityClassIsLive(Class)");
+            LogUtils.w(TAG,"mActivityStack == null when activityClassIsLive(Class)");
             return false;
         }
         for (Activity activity : mActivityStack) {
@@ -183,7 +185,7 @@ public class ActivityManagerUtils {
      */
     public static Activity findActivity(Class<?> activityClass) {
         if (mActivityStack == null) {
-//            Timber.tag(TAG).w("mActivityStack == null when findActivity(Class)");
+            LogUtils.w(TAG,"mActivityStack == null when findActivity(Class)");
             return null;
         }
         for (Activity activity : mActivityStack) {
@@ -306,7 +308,7 @@ public class ActivityManagerUtils {
     public static void printfActivityStack(){
         for (int i = 0, size = mActivityStack.size(); i < size; i++){
             if (null != mActivityStack.get(i)){
-//                LogUtils.d(TAG, " index(" + i + "/" + (size-1) + "):" + mActivityStack.get(i));
+                LogUtils.w(TAG, " index(" + i + "/" + (size-1) + "):" + mActivityStack.get(i));
             }
         }
     }

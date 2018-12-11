@@ -14,6 +14,11 @@ import android.widget.ImageView;
  * 控件点击效果动画工具类
  */
 public class AnimationUtils {
+
+    private AnimationUtils(){
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
     /**
      * 给视图添加点击效果,让背景变深
      * */

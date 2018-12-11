@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -20,7 +22,7 @@ public class RxLearnRange {
                 .subscribe(new Observer<Integer>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.log(TAG,"onSubscribe");
+                        Log.d(TAG,"onSubscribe");
                     }
 
                     @Override

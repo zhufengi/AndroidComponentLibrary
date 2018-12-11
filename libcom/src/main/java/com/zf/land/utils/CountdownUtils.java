@@ -11,6 +11,7 @@ import android.widget.TextView;
  * 倒计时工具类
  */
 public class CountdownUtils implements Runnable {
+
 	private int remainingSeconds;
 	private int currentRemainingSeconds;
     private boolean running;
@@ -20,6 +21,10 @@ public class CountdownUtils implements Runnable {
 	private Handler handler;
 	private CountdownListener countdownListener;
     private TextViewGetListener textViewGetListener;
+
+	private CountdownUtils() {
+		throw new UnsupportedOperationException("cannot be instantiated");
+	}
 	
 	/**
      * 创建一个倒计时器

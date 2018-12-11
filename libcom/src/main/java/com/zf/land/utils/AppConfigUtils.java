@@ -8,8 +8,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
-import com.zf.land.Logger;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class AppConfigUtils {
     private static String nullException = "please input all parameter";
 
     private AppConfigUtils() {
-        throw new IllegalStateException("you can't instantiate me!");
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**
@@ -38,7 +36,7 @@ public class AppConfigUtils {
      */
     public static PackageInfo getPackageInfo(Context context, String pckName) {
         if (context == null || StringUtils.isEmpty(pckName)) {
-            Logger.e(TAG, "getPackageInfo " + nullException);
+            LogUtils.d(TAG, "getPackageInfo " + nullException);
             return null;
         }
         try {
@@ -58,7 +56,7 @@ public class AppConfigUtils {
      */
     public static int getVersionCode(Context context) {
         if (context == null) {
-            Logger.e(TAG, "getVersionCode " + nullException);
+            LogUtils.d(TAG, "getVersionCode " + nullException);
             return 0;
         }
         int versionCode = 0;
@@ -80,7 +78,7 @@ public class AppConfigUtils {
     public static String getVersionName(Context context) {
         String name = "";
         if (context == null) {
-            Logger.e(TAG, "getVersionCode " + nullException);
+            LogUtils.d(TAG, "getVersionCode " + nullException);
             return name;
         }
         try {
@@ -102,7 +100,7 @@ public class AppConfigUtils {
     public static int getVersionCode(Context context, String packageName) {
         int versionCode = 0;
         if (context == null || StringUtils.isEmpty(packageName)) {
-            Logger.e(TAG, "getVersionCode " + nullException);
+            LogUtils.d(TAG, "getVersionCode " + nullException);
             return versionCode;
         }
         try {
@@ -122,7 +120,7 @@ public class AppConfigUtils {
      */
     public static boolean isPackageExist(Context context, String pckName) {
         if (context == null || StringUtils.isEmpty(pckName)) {
-            Logger.e(TAG, "getVersionCode " + nullException);
+            LogUtils.d(TAG, "getVersionCode " + nullException);
             return false;
         }
         try {
@@ -130,7 +128,7 @@ public class AppConfigUtils {
             if (pckInfo != null)
                 return true;
         } catch (PackageManager.NameNotFoundException e) {
-            Logger.e(TAG, e.getMessage());
+            LogUtils.e(TAG, e.getMessage());
             return false;
         }
         return false;
@@ -147,7 +145,7 @@ public class AppConfigUtils {
         String appName = null;
         PackageManager pm = context.getPackageManager();
         if (context == null || StringUtils.isEmpty(packageName)) {
-            Logger.e(TAG, "getAppName " + nullException);
+            LogUtils.e(TAG, "getAppName " + nullException);
             return appName;
         }
         try {
@@ -170,7 +168,7 @@ public class AppConfigUtils {
         PackageManager pm = context.getPackageManager();
         Drawable appIcon = null;
         if (context == null || StringUtils.isEmpty(packageName)) {
-            Logger.e(TAG, "getAppIcon " + nullException);
+            LogUtils.e(TAG, "getAppIcon " + nullException);
             return appIcon;
         }
         try {
@@ -192,7 +190,7 @@ public class AppConfigUtils {
     public static long getAppFirstInstallTime(Context context, String packageName) {
         long firstInstallTime = 0;
         if (context == null || StringUtils.isEmpty(packageName)) {
-            Logger.e(TAG, "getAppFirstInstallTime " + nullException);
+            LogUtils.e(TAG, "getAppFirstInstallTime " + nullException);
             return firstInstallTime;
         }
         try {
@@ -214,7 +212,7 @@ public class AppConfigUtils {
     public static String[] getAppPermissions(Context context, String packname) {
         String[] requestedPermissions = null;
         if (context == null || StringUtils.isEmpty(packname)) {
-            Logger.e(TAG, "getAppPermissions " + nullException);
+            LogUtils.e(TAG, "getAppPermissions " + nullException);
             return requestedPermissions;
         }
         try {
@@ -235,7 +233,7 @@ public class AppConfigUtils {
      */
     public static boolean hasPermission(Context context, String permission) {
         if (context == null || StringUtils.isEmpty(permission)) {
-            Logger.e(TAG, "hasPermission " + nullException);
+            LogUtils.e(TAG, "hasPermission " + nullException);
             return false;
         }
         try {
@@ -263,7 +261,7 @@ public class AppConfigUtils {
     public static boolean isAppInstalled(Context context, String packageName) {
         boolean installed = false;
         if (StringUtils.isEmpty(packageName)) {
-            Logger.e(TAG, "isAppInstalled " + nullException);
+            LogUtils.e(TAG, "isAppInstalled " + nullException);
             return installed;
         }
         List<ApplicationInfo> installedApplications = context.getPackageManager().getInstalledApplications(0);
@@ -288,7 +286,7 @@ public class AppConfigUtils {
         boolean isSys = false;
         PackageManager pm = context.getPackageManager();
         if (context == null || StringUtils.isEmpty(packageName)){
-            Logger.e(TAG, "isSystemApp " + nullException);
+            LogUtils.e(TAG, "isSystemApp " + nullException);
             return false;
         }
         try {
@@ -310,7 +308,7 @@ public class AppConfigUtils {
      */
     public static void runApp(Context context, String packagename) {
         if (context == null || StringUtils.isEmpty(packagename)){
-            Logger.e(TAG,"runApp "+nullException);
+            LogUtils.e(TAG,"runApp "+nullException);
             return;
         }else {
             context.startActivity(new Intent(context.getPackageManager().getLaunchIntentForPackage(packagename)));

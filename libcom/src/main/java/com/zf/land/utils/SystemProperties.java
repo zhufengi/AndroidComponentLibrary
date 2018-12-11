@@ -1,4 +1,4 @@
-package com.zf.land.comm.root;
+package com.zf.land.utils;
 
 import java.lang.reflect.Method;
 
@@ -11,6 +11,10 @@ import java.lang.reflect.Method;
 public class SystemProperties {
 
     private static final String TAG = "SystemProperties";
+
+    private SystemProperties(){
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      *
@@ -47,14 +51,17 @@ public class SystemProperties {
     }
 
     /**
-     *
+     * 获取sdk版本
      * @return
      */
     public static int getSdkVersion() {
         return getInt("ro.build.version.sdk", -1);
     }
 
-    //-------------------------------------------------------------------
+    /**
+     * ================================================================
+     *
+     */
     private static Class<?> mClassType = null;
     private static Method mGetMethod = null;
     private static Method mGetIntMethod = null;

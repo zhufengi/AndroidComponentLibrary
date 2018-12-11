@@ -18,6 +18,11 @@ import java.nio.charset.Charset;
  */
 public class AssetsUtils {
     private static final String ENCODING = "UTF-8";
+
+    private AssetsUtils(){
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
     /**
      * 从assets获取文件
      *

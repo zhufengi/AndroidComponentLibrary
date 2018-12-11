@@ -1,12 +1,11 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Notification;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -27,12 +26,12 @@ public class RxLearnDoOnEach {
                 .doOnEach(new Consumer<Notification<Integer>>() {
                     @Override
                     public void accept(Notification<Integer> integerNotification) throws Exception {
-                        Logger.log(TAG,"doOnEach===>"+integerNotification.getValue());
+                        Log.d(TAG,"doOnEach===>"+integerNotification.getValue());
                     }
                 }).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                Logger.log(TAG,"integer:"+integer);
+                Log.d(TAG,"integer:"+integer);
             }
         });
     }

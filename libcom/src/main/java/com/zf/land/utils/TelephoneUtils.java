@@ -11,16 +11,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * ========================================================================
  * Get phone info, such as IMEI,IMSI,Number,Sim State, etc.
- *
  * <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
- *
- * @author MaTianyu
- * @date 2014-09-25
+ * ========================================================================
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/11/26
+ * @description: SystemProperties
  */
-public class TelephoneUtil {
 
-    private static final String TAG = TelephoneUtil.class.getSimpleName();
+public class TelephoneUtils {
+
+    private static final String TAG = TelephoneUtils.class.getSimpleName();
+
+    private TelephoneUtils(){
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      * IMSI是国际移动用户识别码的简称(International Mobile Subscriber Identity)

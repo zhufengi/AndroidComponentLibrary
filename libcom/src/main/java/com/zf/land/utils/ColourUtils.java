@@ -17,6 +17,10 @@ import java.lang.reflect.Field;
  */
 public class ColourUtils {
 
+    private ColourUtils() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
     /**
      * 给Drawable着色
      * @param drawable 待着色的drawable

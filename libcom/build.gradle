@@ -41,4 +41,5 @@ dependencies {
     implementation files('libs/commons-lang3-3.8.1.jar')
     implementation 'com.dianping.android.sdk:logan:1.1.0'
     api 'com.orhanobut:logger:2.2.0'
+    implementation files('libs/gson-2.8.5.jar')
 }

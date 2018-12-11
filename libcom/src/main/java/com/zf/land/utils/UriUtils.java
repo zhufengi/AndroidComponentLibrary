@@ -10,9 +10,17 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 
 /**
- * @author Jenly <a href="mailto:jenly1314@gmail.com">Jenly</a>
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/11/26
+ * @description: UriUtils
  */
+
 public class UriUtils {
+
+    private UriUtils(){
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      * 根据Uri获取图片的绝对路径

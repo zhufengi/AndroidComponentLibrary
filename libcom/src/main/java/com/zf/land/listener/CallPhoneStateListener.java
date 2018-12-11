@@ -5,7 +5,8 @@ import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 
-import com.zf.land.Logger;
+import com.orhanobut.logger.Logger;
+import com.zf.land.utils.LogUtils;
 
 /**
  * @author: wang.xiaotong
@@ -31,7 +32,7 @@ public class CallPhoneStateListener extends PhoneStateListener {
      * @param context
      */
     public static void registerPhoneStateListener(Context context) {
-        Logger.log(TAG,"registerPhoneStateListener ...");
+        LogUtils.i(TAG,"registerPhoneStateListener ...");
         CallPhoneStateListener customPhoneStateListener = new CallPhoneStateListener(context);
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager != null) {
@@ -42,12 +43,12 @@ public class CallPhoneStateListener extends PhoneStateListener {
     @Override
     public void onServiceStateChanged(ServiceState serviceState) {
         super.onServiceStateChanged(serviceState);
-        Logger.log(TAG, "CustomPhoneStateListener onServiceStateChanged: " + serviceState);
+        LogUtils.i(TAG, "CustomPhoneStateListener onServiceStateChanged: " + serviceState);
     }
 
     @Override
     public void onCallStateChanged(int state, String incomingNumber) {
-        Logger.log(TAG, "CustomPhoneStateListener state: "+ state + " incomingNumber: " + incomingNumber);
+        LogUtils.i(TAG, "CustomPhoneStateListener state: "+ state + " incomingNumber: " + incomingNumber);
         switch (state) {
             // (电话挂断)当前电话没有进行活动
             case TelephonyManager.CALL_STATE_IDLE:

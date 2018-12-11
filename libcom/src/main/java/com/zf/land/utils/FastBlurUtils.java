@@ -1,18 +1,3 @@
-/*
- * Copyright 2017 JessYan
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.zf.land.utils;
 
 import android.content.Context;
@@ -27,44 +12,16 @@ import android.view.View;
  * @author: wang.xiaotong
  * @github: https://github.com/zhufengi
  * @time: 2018/11/22
- * @description: FastBlur
+ * @description: FastBlurUtils
  *  处理高斯模糊的工具类
  */
-public class FastBlur {
+public class FastBlurUtils {
 
-    private FastBlur() {
-        throw new IllegalStateException("you can't instantiate me!");
+    private FastBlurUtils() {
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
-
-        // Stack Blur v1.0 from
-        // http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html
-        //
-        // Java Author: Mario Klingemann <mario at quasimondo.com>
-        // http://incubator.quasimondo.com
-        // created Feburary 29, 2004
-        // Android port : Yahel Bouaziz <yahel at kayenko.com>
-        // http://www.kayenko.com
-        // ported april 5th, 2012
-
-        // This is a compromise between Gaussian Blur and Box blur
-        // It creates much better looking blurs than Box Blur, but is
-        // 7x faster than my Gaussian Blur implementation.
-        //
-        // I called it Stack Blur because this describes best how this
-        // filter works internally: it creates a kind of moving stack
-        // of colors whilst scanning through the image. Thereby it
-        // just has to add one new block of color to the right side
-        // of the stack and remove the leftmost color. The remaining
-        // colors on the topmost layer of the stack are either added on
-        // or reduced by one, depending on if they are on the right or
-        // on the left side of the stack.
-        //
-        // If you are using this algorithm in your code please add
-        // the following line:
-        //
-        // Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com>
 
         Bitmap bitmap;
         if (canReuseInBitmap) {
@@ -283,7 +240,7 @@ public class FastBlur {
         float radius = 15;
         float scaleFactor = 8;
         //放大到整个view的大小
-        bkg = DrawableProvider.getReSizeBitmap(bkg, view.getMeasuredWidth(), view.getMeasuredHeight());
+        bkg = DrawableProviderUtils.getReSizeBitmap(bkg, view.getMeasuredWidth(), view.getMeasuredHeight());
 
         Bitmap overlay = Bitmap.createBitmap((int) (view.getMeasuredWidth() / scaleFactor)
                 , (int) (view.getMeasuredHeight() / scaleFactor), Bitmap.Config.ARGB_8888);
@@ -293,7 +250,7 @@ public class FastBlur {
         Paint paint = new Paint();
         paint.setFlags(Paint.FILTER_BITMAP_FLAG);
         canvas.drawBitmap(bkg, 0, 0, paint);
-        overlay = FastBlur.doBlur(overlay, (int) radius, true);
+        overlay = FastBlurUtils.doBlur(overlay, (int) radius, true);
         view.setBackgroundDrawable(new BitmapDrawable(context.getResources(), overlay));
         Log.w("test", "cost " + (System.currentTimeMillis() - startMs) + "ms");
     }
@@ -312,7 +269,7 @@ public class FastBlur {
         float radius = 15;
         float scaleFactor = 8;
         //放大到整个view的大小
-        bkg = DrawableProvider.getReSizeBitmap(bkg, width, height);
+        bkg = DrawableProviderUtils.getReSizeBitmap(bkg, width, height);
         Bitmap overlay = Bitmap.createBitmap((int) (width / scaleFactor)
                 , (int) (height / scaleFactor), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(overlay);
@@ -320,7 +277,7 @@ public class FastBlur {
         Paint paint = new Paint();
         paint.setFlags(Paint.FILTER_BITMAP_FLAG);
         canvas.drawBitmap(bkg, 0, 0, paint);
-        overlay = FastBlur.doBlur(overlay, (int) radius, true);
+        overlay = FastBlurUtils.doBlur(overlay, (int) radius, true);
         Log.w("test", "cost " + (System.currentTimeMillis() - startMs) + "ms");
         return overlay;
     }

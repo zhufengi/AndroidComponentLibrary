@@ -4,7 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.zf.land.Logger;
+import com.orhanobut.logger.Logger;
+import com.zf.land.utils.LogUtils;
+
 /**
  * @author: wang.xiaotong
  * @github: https://github.com/zhufengi
@@ -23,11 +25,11 @@ public class BootAndShutdownReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent != null){
             if (intent.getAction().equals(ACTION_BOOT)){
-                Logger.log(TAG,"开机");
+                LogUtils.d(TAG,"开机");
             }else if (intent.getAction().equals(ACTION_SHUTDOWN)){
-                Logger.log(TAG,"关机");
+                LogUtils.d(TAG,"关机");
             }else if (intent.getAction().equals(ACTION_REBOOT)){
-                Logger.log(TAG,"重启");
+                LogUtils.d(TAG,"重启");
             }
         }
     }

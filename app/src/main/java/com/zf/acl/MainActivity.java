@@ -3,6 +3,7 @@ package com.zf.acl;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.orhanobut.logger.Logger;
 import com.zf.acl.rxjava.RxLearnBuffer;
 import com.zf.acl.rxjava.RxLearnCollect;
 import com.zf.acl.rxjava.RxLearnCombineLatest;
@@ -46,7 +47,6 @@ import com.zf.acl.rxjava.RxLearnTimer;
 import com.zf.acl.rxjava.RxLearnWindow;
 import com.zf.acl.rxjava.RxLearnZip;
 import com.zf.acl.rxjava.RxlearnDoOnLifecycle;
-import com.zf.land.Logger;
 import com.zf.land.base.BaseActivity;
 import com.zf.land.eventbus.MessageEvent;
 import com.zf.land.utils.AppConfigUtils;
@@ -65,7 +65,6 @@ public class MainActivity extends BaseActivity {
 //        onLearn();
         String[] permissions = AppConfigUtils.getAppPermissions(this, "com.zf.acl");
 //        AppConfigUtils.killProcesses(this,"com.zf.acl");
-        Logger.log("111",AppConfigUtils.getAppPermissions(this,"com.zf.acl")+"");
 
     }
 

@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -21,7 +23,7 @@ public class RxLearnCount {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        Logger.log(TAG,"count:"+aLong);
+                        Log.d(TAG,"count:"+aLong);
                     }
                 });
     }

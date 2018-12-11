@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -26,7 +28,7 @@ public class RxLearnCreate {
         Observable observable = Observable.create(new ObservableOnSubscribe() {
             @Override
             public void subscribe(ObservableEmitter emitter) throws Exception {
-                Logger.log(TAG,"ObservableEmitter");
+                Log.d(TAG,"ObservableEmitter");
                 emitter.onNext(1);
                 emitter.onNext(2);
                 emitter.onNext(3);
@@ -37,22 +39,22 @@ public class RxLearnCreate {
         Observer observer = new Observer<Integer>(){
             @Override
             public void onSubscribe(Disposable d) {
-                Logger.log(TAG,"onSubscribe:"+d.toString());
+                Log.d(TAG,"onSubscribe:"+d.toString());
             }
 
             @Override
             public void onNext(Integer integer) {
-                Logger.log(TAG," integer:"+integer);
+                Log.d(TAG," integer:"+integer);
             }
 
             @Override
             public void onError(Throwable e) {
-                Logger.log(TAG,"onError:"+e.toString());
+                Log.d(TAG,"onError:"+e.toString());
             }
 
             @Override
             public void onComplete() {
-                Logger.log(TAG,"onComplete");
+                Log.d(TAG,"onComplete");
             }
         };
         observable.subscribe(observer);
@@ -79,7 +81,7 @@ public class RxLearnCreate {
 
                     @Override
                     public void onNext(String o) {
-                        Logger.log(TAG,""+o);
+                        Log.d(TAG,""+o);
                     }
 
                     @Override

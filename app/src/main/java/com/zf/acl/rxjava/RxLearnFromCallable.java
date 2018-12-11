@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import java.util.concurrent.Callable;
 
@@ -25,7 +27,7 @@ public class RxLearnFromCallable {
         }).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                Logger.log(TAG," integer:"+integer);
+                Log.d(TAG," integer:"+integer);
             }
         });
     }

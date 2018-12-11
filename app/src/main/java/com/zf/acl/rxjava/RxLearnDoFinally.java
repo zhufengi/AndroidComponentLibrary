@@ -1,7 +1,5 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
-
 import io.reactivex.Observable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;

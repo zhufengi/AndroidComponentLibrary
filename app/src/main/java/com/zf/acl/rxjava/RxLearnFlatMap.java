@@ -1,10 +1,10 @@
 package com.zf.acl.rxjava;
 
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 import com.zf.acl.rxjava.bean.BookBean;
 import com.zf.acl.rxjava.bean.BookType;
-import com.zf.land.Logger;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -42,22 +42,22 @@ public class RxLearnFlatMap {
         }).subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
             }
 
             @Override
             public void onNext(String s) {
-                Logger.log(TAG,"onNext:"+s);
+                Log.d(TAG,"onNext:"+s);
             }
 
             @Override
             public void onError(Throwable e) {
-                Logger.log(TAG,"onError");
+                Log.d(TAG,"onError");
             }
 
             @Override
             public void onComplete() {
-                Logger.log(TAG,"onComplete");
+                Log.d(TAG,"onComplete");
             }
         });
     }

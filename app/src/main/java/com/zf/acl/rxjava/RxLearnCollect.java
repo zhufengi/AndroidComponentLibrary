@@ -2,7 +2,7 @@ package com.zf.acl.rxjava;
 
 import android.util.Log;
 
-import com.zf.land.Logger;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -37,7 +37,7 @@ public class RxLearnCollect {
             public void accept(ArrayList<Integer> integers) throws Exception {
                 Log.d(TAG, "===============accept " + integers);
                 for (Integer integer:integers){
-                    Logger.log(TAG,"accept ==>"+integer);
+                    Log.d(TAG,"accept ==>"+integer);
                 }
 
             }

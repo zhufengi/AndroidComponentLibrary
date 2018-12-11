@@ -24,11 +24,12 @@ import javax.xml.transform.stream.StreamSource;
  * @time: 2018/11/22
  * @description: 处理字符串的工具类
  */
-public class CharacterHandler {
+public class CharacterHandlerUtils {
 
     private static final String HEXADECIMAL = "0123456789ABCDEF";
-    private CharacterHandler() {
-        throw new IllegalStateException("you can't instantiate me!");
+
+    private CharacterHandlerUtils() {
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**

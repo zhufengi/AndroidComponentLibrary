@@ -4,10 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import com.zf.land.Logger;
+import com.orhanobut.logger.Logger;
 import com.zf.land.receiver.BootAndShutdownReceiver;
 import com.zf.land.receiver.SdcardListenReceiver;
 import com.zf.land.receiver.UserPresentReceiver;
+import com.zf.land.utils.LogUtils;
 
 /**
  * @author: wang.xiaotong
@@ -42,7 +43,7 @@ public class ReceiverIntentFilterManager {
         mIntentFilter.addAction(Intent.ACTION_USER_PRESENT);
         mIntentFilter.setPriority(Integer.MAX_VALUE);
         mContext.registerReceiver(mUserPresentReceiver, mIntentFilter);
-        Logger.log(TAG,"addUserPresentReceiver ...");
+        LogUtils.i(TAG,"addUserPresentReceiver ...");
     }
 
     /**
@@ -54,7 +55,7 @@ public class ReceiverIntentFilterManager {
         mIntentFilter.addAction(Intent.ACTION_SHUTDOWN);
         mIntentFilter.addAction(Intent.ACTION_REBOOT);
         mContext.registerReceiver(mBootAndShutdownReceiver,mIntentFilter);
-        Logger.log(TAG,"addBootAndShutdownReceiver ...");
+        LogUtils.d(TAG,"addBootAndShutdownReceiver ...");
     }
 
     /**

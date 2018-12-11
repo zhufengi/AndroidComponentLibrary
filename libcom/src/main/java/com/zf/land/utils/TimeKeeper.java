@@ -4,10 +4,14 @@ import android.os.SystemClock;
 import android.util.Log;
 
 /**
- * @author 氢一 @http://litesuits.com
- * @date 2017-05-27
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/11/26
+ * @description: TimeKeeper
  */
+
 public class TimeKeeper {
+
     private static final String TAG = "TimeKeeper";
     private long keepTimeMillis;
     private long startMillis;

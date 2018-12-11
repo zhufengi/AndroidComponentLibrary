@@ -4,7 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.zf.land.Logger;
+import com.orhanobut.logger.Logger;
+import com.zf.land.utils.LogUtils;
 
 /**
  * @author: wang.xiaotong
@@ -26,7 +27,7 @@ public class SdcardListenReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent != null){
             String action = intent.getAction();
-            Logger.e(TAG,"action :"+action);
+            LogUtils.d(TAG,"action :"+action);
 //            callback.onSdcardListenCurrentAction(action);
             switch (action){
                 case Intent.ACTION_MEDIA_MOUNTED:

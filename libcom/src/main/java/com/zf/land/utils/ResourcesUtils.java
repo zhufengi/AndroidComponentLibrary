@@ -19,9 +19,13 @@ package com.zf.land.utils;
 import android.content.Context;
 
 /**
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/12/7
+ * @description: ResourcesUtils
  * 资源文件工具类
- * @author Jenly
  */
+
 public class ResourcesUtils {
 	
 	private static final String RES_ID = "id";
@@ -35,9 +39,9 @@ public class ResourcesUtils {
 	private static final String RES_MENU = "menu";
 
 	private ResourcesUtils(){
-		throw new AssertionError();
+		throw new UnsupportedOperationException("cannot be instantiated");
 	}
-	
+
 	/**
 	 * 获取资源文件的id
 	 * @param context

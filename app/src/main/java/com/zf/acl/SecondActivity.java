@@ -3,7 +3,7 @@ package com.zf.acl;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.zf.land.Logger;
+import com.orhanobut.logger.Logger;
 import com.zf.land.base.BaseActivity;
 import com.zf.land.eventbus.MessageEvent;
 
@@ -38,7 +38,7 @@ public class SecondActivity extends BaseActivity {
 
             @Override
             public void onNext(String o) {
-                Logger.log(TAG,"testObserver:"+o);
+                Log.d(TAG,"testObserver:"+o);
             }
 
             @Override

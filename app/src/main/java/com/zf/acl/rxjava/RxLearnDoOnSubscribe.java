@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -22,27 +24,27 @@ public class RxLearnDoOnSubscribe {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-                        Logger.log(TAG,"doOnSubscribe");
+                        Log.d(TAG,"doOnSubscribe");
                     }
                 }).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
             }
 
             @Override
             public void onNext(Integer integer) {
-                Logger.log(TAG,"onNext:"+integer);
+                Log.d(TAG,"onNext:"+integer);
             }
 
             @Override
             public void onError(Throwable e) {
-                Logger.log(TAG,"onError");
+                Log.d(TAG,"onError");
             }
 
             @Override
             public void onComplete() {
-                Logger.log(TAG,"onComplete");
+                Log.d(TAG,"onComplete");
             }
         });
     }

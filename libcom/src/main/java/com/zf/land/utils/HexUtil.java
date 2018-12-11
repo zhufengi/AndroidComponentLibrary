@@ -1,13 +1,17 @@
 package com.zf.land.utils;
 
 /**
- * reference apache commons <a
- * href="http://commons.apache.org/codec/">http://commons.apache.org/codec/</a>
- *
- * @author Aub
- *
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/11/22
+ * @description: HexUtil
  */
+
 public class HexUtil {
+
+    private HexUtil() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      * 用于建立十六进制字符的输出的小写字符数组
@@ -151,15 +155,6 @@ public class HexUtil {
                     + " at index " + index);
         }
         return digit;
-    }
-
-    public static void main(String[] args) {
-        String srcStr = "待转换字符串";
-        String encodeStr = encodeHexStr(srcStr.getBytes());
-        String decodeStr = new String(decodeHex(encodeStr.toCharArray()));
-        System.out.println("转换前：" + srcStr);
-        System.out.println("转换后：" + encodeStr);
-        System.out.println("还原后：" + decodeStr);
     }
 
 }

@@ -40,7 +40,7 @@ public class ZipHelper {
 
 
     private ZipHelper() {
-        throw new IllegalStateException("you can't instantiate me!");
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**

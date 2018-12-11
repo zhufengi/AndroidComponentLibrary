@@ -8,8 +8,6 @@ import android.os.StatFs;
 import android.os.SystemClock;
 import android.os.storage.StorageManager;
 import android.util.Log;
-
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,7 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import static com.zf.land.DevicesUtils.getMobileModel;
+import static com.zf.land.utils.DevicesUtils.getMobileModel;
 
 /**
  * @author: wang.xiaotong
@@ -30,7 +28,12 @@ import static com.zf.land.DevicesUtils.getMobileModel;
  * @description: SdCardUtils
  */
 public class SdCardUtils {
+
     private static final String TAG = "SdCardUtils";
+
+    private SdCardUtils(){
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**返回true 表示可用,false表示不可用*/
     public static boolean isSDCard(Context context) {

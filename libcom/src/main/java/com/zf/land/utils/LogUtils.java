@@ -105,7 +105,7 @@ public final class LogUtils {
 
 
     private LogUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     public static Config getConfig() {
@@ -214,11 +214,13 @@ public final class LogUtils {
         if (type_low < CONFIG.mConsoleFilter && type_low < CONFIG.mFileFilter) return;
         final TagHead tagHead = processTagAndHead(tag);
         String body = processBody(type_high, contents);
+        String bodyPrint = processBodyForPrint(type_high, contents);
+
         if (CONFIG.mLog2ConsoleSwitch && type_low >= CONFIG.mConsoleFilter && type_high != FILE) {
             print2Console(type_low, tagHead.tag, tagHead.consoleHead, body);
         }
         if ((CONFIG.mLog2FileSwitch || type_high == FILE) && type_low >= CONFIG.mFileFilter) {
-            print2File(type_low, tagHead.tag, tagHead.fileHead + body);
+            print2File(type_low, tagHead.tag, tagHead.fileHead + bodyPrint);
         }
     }
 
@@ -316,6 +318,29 @@ public final class LogUtils {
                             .append(" = ")
                             .append(formatObject(content))
                             .append(LINE_SEP);
+                }
+                body = sb.toString();
+            }
+        }
+        return body.length() == 0 ? NOTHING : body;
+    }
+
+    private static String processBodyForPrint(final int type, final Object... contents) {
+        String body = NULL;
+        if (contents != null) {
+            if (contents.length == 1) {
+                body = formatObject(type, contents[0]);
+            } else {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0, len = contents.length; i < len; ++i) {
+                    Object content = contents[i];
+                    sb.append(ARGS)
+                            .append("[")
+                            .append(i)
+                            .append("]")
+                            .append(" = ")
+                            .append(formatObject(content))
+                            .append("  ");
                 }
                 body = sb.toString();
             }
@@ -481,9 +506,11 @@ public final class LogUtils {
         }
         StringBuilder sb = new StringBuilder();
         int pid = android.os.Process.myPid();
+        String threadName = Thread.currentThread().getName();
         sb.append(date)
-                .append(pid)
-                .append(time)
+                .append(" "+time)
+                .append(" >== pid:==> "+pid+"  ")
+                .append("thred:->"+threadName+" ")
                 .append(T[type - V])
                 .append("/")
                 .append(tag)
@@ -725,7 +752,7 @@ public final class LogUtils {
 
         @Override
         public String toString() {
-            return "switch: " + mLogSwitch
+            return LINE_SEP+"switch: " + mLogSwitch
                     + LINE_SEP + "console: " + mLog2ConsoleSwitch
                     + LINE_SEP + "tag: " + (mTagIsSpace ? "null" : mGlobalTag)
                     + LINE_SEP + "head: " + mLogHeadSwitch

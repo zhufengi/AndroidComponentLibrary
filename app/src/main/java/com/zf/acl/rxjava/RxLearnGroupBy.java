@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -27,12 +29,12 @@ public class RxLearnGroupBy {
                 }).subscribe(new Observer<GroupedObservable<Integer, Integer>>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
             }
 
             @Override
             public void onNext(final GroupedObservable<Integer, Integer> integerIntegerGroupedObservable) {
-                Logger.log(TAG,"onNext");
+                Log.d(TAG,"onNext");
                 integerIntegerGroupedObservable.subscribe(new Observer<Integer>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -41,7 +43,7 @@ public class RxLearnGroupBy {
 
                     @Override
                     public void onNext(Integer integer) {
-                        Logger.log(TAG,"onNext===> name:"+integerIntegerGroupedObservable.getKey()+",integer:"+integer);
+                        Log.d(TAG,"onNext===> name:"+integerIntegerGroupedObservable.getKey()+",integer:"+integer);
                     }
 
                     @Override
@@ -58,12 +60,12 @@ public class RxLearnGroupBy {
 
             @Override
             public void onError(Throwable e) {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
             }
 
             @Override
             public void onComplete() {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
             }
         });
     }

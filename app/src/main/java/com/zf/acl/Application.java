@@ -30,7 +30,7 @@ public class Application extends BaseApplication {
                 // 打印 log 时是否存到文件的开关，默认关
                 .setLog2FileSwitch(true)
                 // 当自定义路径为空时，写入应用的/cache/log/目录中
-                .setDir(getFilesDir())
+                .setDir("/sdcard/Android/data/com.zf.acl/")
                 // 当文件前缀为空时，默认为"util"，即写入文件为"util-MM-dd.txt"
                 .setFilePrefix("logutils")
                 // 输出日志是否带边框开关，默认开

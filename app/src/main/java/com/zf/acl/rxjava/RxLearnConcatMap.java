@@ -1,8 +1,9 @@
 package com.zf.acl.rxjava;
 
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 import com.zf.acl.rxjava.bean.BookBean;
-import com.zf.acl.rxjava.bean.BookType;
-import com.zf.land.Logger;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,22 +39,22 @@ public class RxLearnConcatMap {
                 }).subscribe(new Observer<BookBean>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
             }
 
             @Override
             public void onNext(BookBean bookBean) {
-                Logger.log(TAG,"onNext:"+bookBean.name);
+                Log.d(TAG,"onNext:"+bookBean.name);
             }
 
             @Override
             public void onError(Throwable e) {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
             }
 
             @Override
             public void onComplete() {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
             }
         });
     }

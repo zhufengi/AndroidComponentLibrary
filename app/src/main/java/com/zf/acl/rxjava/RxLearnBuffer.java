@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -29,25 +31,25 @@ public class RxLearnBuffer {
                 .subscribe(new Observer<List<Integer>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.log(TAG,"onSubscribe");
+                        Log.d(TAG,"onSubscribe");
                     }
 
                     @Override
                     public void onNext(List<Integer> integers) {
-                        Logger.log(TAG,"当前缓冲区大小："+integers.size());
+                        Log.d(TAG,"当前缓冲区大小："+integers.size());
                         for (Integer integer:integers) {
-                            Logger.log(TAG,"当前缓冲区数："+integer);
+                            Log.d(TAG,"当前缓冲区数："+integer);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Logger.log(TAG,"onSubscribe");
+                        Log.d(TAG,"onSubscribe");
                     }
 
                     @Override
                     public void onComplete() {
-                        Logger.log(TAG,"onSubscribe");
+                        Log.d(TAG,"onSubscribe");
                     }
                 });
     }

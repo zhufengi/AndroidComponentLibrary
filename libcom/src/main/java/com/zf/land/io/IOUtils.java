@@ -1,24 +1,9 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.zf.land.io;
 
 import android.os.Build;
-import com.litesuits.common.io.stream.*;
 
+import com.zf.land.io.stream.StringBuilderWriter;
+import com.zf.land.io.stream.ByteArrayOutputStream;
 import java.io.*;
 import java.net.*;
 import java.nio.channels.Selector;
@@ -407,7 +392,7 @@ public class IOUtils {
      * @since 2.0
      */
     public static InputStream toBufferedInputStream(InputStream input) throws IOException {
-        return com.litesuits.common.io.stream.ByteArrayOutputStream.toBufferedInputStream(input);
+        return ByteArrayOutputStream.toBufferedInputStream(input);
     }
 
     /**
@@ -437,7 +422,7 @@ public class IOUtils {
      * @throws IOException  if an I/O error occurs
      */
     public static byte[] toByteArray(InputStream input) throws IOException {
-        com.litesuits.common.io.stream.ByteArrayOutputStream output = new com.litesuits.common.io.stream.ByteArrayOutputStream();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
         copy(input, output);
         return output.toByteArray();
     }
@@ -447,7 +432,7 @@ public class IOUtils {
      * Use this method instead of <code>toByteArray(InputStream)</code>
      * when <code>InputStream</code> size is known.
      * <b>NOTE:</b> the method checks that the length can safely be cast to an int without truncation
-     * before using {@link com.litesuits.common.io.IOUtils#toByteArray(InputStream, int)} to read into the byte array.
+     * before using (InputStream, int) to read into the byte array.
      * (Arrays can have no more than Integer.MAX_VALUE entries anyway)
      *
      * @param input the <code>InputStream</code> to read from
@@ -455,7 +440,6 @@ public class IOUtils {
      * @return the requested byte array
      * @throws IOException      if an I/O error occurs or <code>InputStream</code> size differ from parameter size
      * @throws IllegalArgumentException if size is less than zero or size is greater than Integer.MAX_VALUE
-     * @see com.litesuits.common.io.IOUtils#toByteArray(InputStream, int)
      * @since 2.1
      */
     public static byte[] toByteArray(InputStream input, long size) throws IOException {
@@ -535,7 +519,7 @@ public class IOUtils {
      * @since 2.3
      */
     public static byte[] toByteArray(Reader input, Charset encoding) throws IOException {
-        com.litesuits.common.io.stream.ByteArrayOutputStream output = new com.litesuits.common.io.stream.ByteArrayOutputStream();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
         copy(input, output, encoding);
         return output.toByteArray();
     }

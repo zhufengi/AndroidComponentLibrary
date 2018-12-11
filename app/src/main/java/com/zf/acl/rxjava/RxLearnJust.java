@@ -1,10 +1,10 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -27,7 +27,7 @@ public class RxLearnJust {
 
                     @Override
                     public void onNext(Integer integer) {
-                        Logger.log(TAG," integer:"+integer);
+                        Log.d(TAG," integer:"+integer);
                     }
 
                     @Override

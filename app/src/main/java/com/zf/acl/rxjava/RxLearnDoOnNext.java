@@ -1,8 +1,9 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
 
-import io.reactivex.Notification;
+import com.orhanobut.logger.Logger;
+
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
@@ -23,12 +24,12 @@ public class RxLearnDoOnNext {
                 .doOnNext(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
-                        Logger.log(TAG,"doOnNext:"+integer);
+                        Log.d(TAG,"doOnNext:"+integer);
                     }
                 }).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                Logger.log(TAG,"integer:"+integer);
+                Log.d(TAG,"integer:"+integer);
             }
         });
     }

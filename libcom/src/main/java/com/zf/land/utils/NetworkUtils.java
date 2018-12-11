@@ -30,10 +30,6 @@ import static android.Manifest.permission.MODIFY_PHONE_STATE;
  */
 public final class NetworkUtils {
 
-    private NetworkUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
-    }
-
     public enum NetworkType {
         NETWORK_ETHERNET,
         NETWORK_WIFI,
@@ -43,6 +39,11 @@ public final class NetworkUtils {
         NETWORK_UNKNOWN,
         NETWORK_NO
     }
+
+    private NetworkUtils() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
 
     /**
      * Open the settings of wireless.

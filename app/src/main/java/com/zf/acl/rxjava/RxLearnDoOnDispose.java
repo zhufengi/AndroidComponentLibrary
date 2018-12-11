@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -26,14 +28,14 @@ public class RxLearnDoOnDispose {
                 .doOnDispose(new Action() {
                     @Override
                     public void run() throws Exception {
-                        Logger.log(TAG,"doOnDispose");
+                        Log.d(TAG,"doOnDispose");
                     }
                 }).subscribe(new Observer<Integer>() {
 
             Disposable disposable;
             @Override
             public void onSubscribe(Disposable d) {
-                Logger.log(TAG,"onSubscribe");
+                Log.d(TAG,"onSubscribe");
 //                disposable = d;
                 d.dispose();
 //                disposable.dispose();
@@ -42,18 +44,18 @@ public class RxLearnDoOnDispose {
 
             @Override
             public void onNext(Integer integer) {
-                Logger.log(TAG,"onNext:"+integer);
+                Log.d(TAG,"onNext:"+integer);
 //                disposable.dispose();
             }
 
             @Override
             public void onError(Throwable e) {
-                Logger.log(TAG,"onError");
+                Log.d(TAG,"onError");
             }
 
             @Override
             public void onComplete() {
-                Logger.log(TAG,"onComplete");
+                Log.d(TAG,"onComplete");
             }
         });
     }

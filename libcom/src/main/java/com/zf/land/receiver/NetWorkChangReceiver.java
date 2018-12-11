@@ -26,13 +26,12 @@ public class NetWorkChangReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         XNotificationManager notificationManager = new XNotificationManager(context);
-        LogUtils.d(TAG, "NetWorkChangReceiver ...network :"+ NetworkUtils.isConnected(context));
+        LogUtils.i(TAG, "NetWorkChangReceiver ...networkType :"+NetworkUtils.getNetworkType(context)+"... connectStatus :"+NetworkUtils.isConnected(context));
 
         if (NetworkUtils.isConnected(context)) {
-            LogUtils.d(TAG, "NetWorkChangReceiver network type ：" + NetworkUtils.getNetworkType(context));
             notificationManager.cancel(notifyID);
         } else {
-            ToastUtils.showToast(context,R.string.string_network_disconnect_hint);
+//            ToastUtils.showToast(context,R.string.string_network_disconnect_hint);
             intent = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 3, intent, PendingIntent.FLAG_CANCEL_CURRENT);

@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
@@ -22,7 +24,7 @@ public class RxLearnFromFuture {
         final FutureTask<String> futureTask = new FutureTask<String>(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                Logger.log(TAG," call");
+                Log.d(TAG," call");
                 return "FutureTask";
             }
         });
@@ -35,7 +37,7 @@ public class RxLearnFromFuture {
                 }).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
-                Logger.log(TAG,"  accept:"+s);
+                Log.d(TAG,"  accept:"+s);
             }
         });
     }

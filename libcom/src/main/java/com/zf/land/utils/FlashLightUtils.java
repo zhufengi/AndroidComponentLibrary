@@ -5,24 +5,36 @@ import android.os.Build;
 import android.os.Handler;
 
 /**
- * <!-- 手电筒 -->
- * Call requires API level 5
+ *
+ * ==================================================================
  * <uses-permission android:name="android.permission.FLASHLIGHT"/>
  * <uses-permission android:name="android.permission.CAMERA"/>
- *
- * @author MaTianyu
- * @date 2014-11-04
+ * ==================================================================
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/11/22
+ * @description: FlashLightUtils
+ * 手电筒
  */
+
 public class FlashLightUtils {
 
     private Camera camera;
     private Handler handler = new Handler();
+
+    private FlashLightUtils() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      * 超过3分钟自动关闭，防止损伤硬件
      */
     private static final int OFF_TIME = 3 * 60 * 1000;
 
+    /**
+     *
+     * @return
+     */
     public boolean turnOnFlashLight() {
         if (camera == null) {
             camera = Camera.open();
@@ -45,6 +57,10 @@ public class FlashLightUtils {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean turnOffFlashLight() {
         if (camera != null) {
             handler.removeCallbacksAndMessages(null);

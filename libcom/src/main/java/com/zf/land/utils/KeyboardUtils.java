@@ -22,7 +22,7 @@ import android.widget.EditText;
 public class KeyboardUtils {
 
     private KeyboardUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**

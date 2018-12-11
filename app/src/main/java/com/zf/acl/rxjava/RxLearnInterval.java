@@ -1,6 +1,8 @@
 package com.zf.acl.rxjava;
 
-import com.zf.land.Logger;
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,22 +28,22 @@ public class RxLearnInterval {
                 .subscribe(new Observer<Long>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.log(TAG,"onSubscribe");
+                        Log.d(TAG,"onSubscribe");
                     }
 
                     @Override
                     public void onNext(Long l) {
-                        Logger.log(TAG,"onNext:"+l);
+                        Log.d(TAG,"onNext:"+l);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Logger.log(TAG,"onError");
+                        Log.d(TAG,"onError");
                     }
 
                     @Override
                     public void onComplete() {
-                        Logger.log(TAG,"onComplete");
+                        Log.d(TAG,"onComplete");
                     }
                 });
     }
