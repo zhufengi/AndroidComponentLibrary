@@ -9,4 +9,9 @@ import android.app.Application;
  * @description: BaseApplication
  */
 public class BaseApplication extends Application{
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }

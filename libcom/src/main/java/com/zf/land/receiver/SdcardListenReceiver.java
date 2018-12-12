@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.orhanobut.logger.Logger;
-import com.zf.land.utils.LogUtils;
+import com.zf.land.comm.utils.LogUtils;
 
 /**
  * @author: wang.xiaotong

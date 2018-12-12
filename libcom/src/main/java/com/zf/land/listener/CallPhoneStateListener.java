@@ -6,7 +6,7 @@ import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 
 import com.orhanobut.logger.Logger;
-import com.zf.land.utils.LogUtils;
+import com.zf.land.comm.utils.LogUtils;
 
 /**
  * @author: wang.xiaotong

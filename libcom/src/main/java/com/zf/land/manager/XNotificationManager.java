@@ -14,16 +14,21 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.zf.land.R;
-import com.zf.land.utils.LogUtils;
+import com.zf.land.comm.utils.LogUtils;
 
 
 /**
- * @author wang.xiaotong
- * 公共的通知栏管理器
+ * @author: wang.xiaotong
+ * @github: https://github.com/zhufengi
+ * @time: 2018/12/7
+ * @description: XNotificationManager
  */
 public class XNotificationManager extends ContextWrapper {
+
     private String TAG = "HNotificationManager";
-    private NotificationManager manager;
+    private NotificationManager manager = null;
+    private static XNotificationManager instance;
+
     /**
      * 通知栏高版本区分
      */
@@ -45,6 +50,17 @@ public class XNotificationManager extends ContextWrapper {
 
     public XNotificationManager(Context context) {
         super(context);
+    }
+
+    public static XNotificationManager getInstance (Context context){
+        if (instance == null){
+            synchronized (XNotificationManager.class){
+                if (instance == null){
+                    instance = new XNotificationManager(context);
+                }
+            }
+        }
+        return instance;
     }
 
     /**

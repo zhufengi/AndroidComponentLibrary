@@ -163,7 +163,7 @@ public final class RomUtils {
     private static String getSystemPropertyByReflect(String key) {
         try {
             @SuppressLint("PrivateApi")
-            Class<?> clz = Class.forName("android.os.SystemProperties");
+            Class<?> clz = Class.forName("android.os.SystemPropertyUtils");
             Method get = clz.getMethod("get", String.class, String.class);
             return (String) get.invoke(clz, key, "");
         } catch (Exception e) {

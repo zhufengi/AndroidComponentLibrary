@@ -3,7 +3,7 @@ package com.zf.acl;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.zf.land.utils.LogUtils;
+import com.zf.land.comm.utils.LogUtils;
 
 public class LogUtilsActivity extends AppCompatActivity {
 

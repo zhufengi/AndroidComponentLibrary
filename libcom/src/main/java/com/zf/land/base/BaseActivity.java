@@ -29,6 +29,7 @@ public class BaseActivity extends AppCompatActivity {
         EventBusUtils.getInstance().register(this);
 
     }
+
     @Subscribe
     public Object onMessageEvent(MessageEvent messageEvent){
         Log.i(TAG,""+messageEvent.getMessage());

@@ -49,7 +49,7 @@ import com.zf.acl.rxjava.RxLearnZip;
 import com.zf.acl.rxjava.RxlearnDoOnLifecycle;
 import com.zf.land.base.BaseActivity;
 import com.zf.land.eventbus.MessageEvent;
-import com.zf.land.utils.AppConfigUtils;
+import com.zf.land.comm.utils.AppConfigUtils;
 
 import java.util.concurrent.TimeUnit;
 

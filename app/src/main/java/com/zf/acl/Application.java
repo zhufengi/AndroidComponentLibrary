@@ -1,7 +1,7 @@
 package com.zf.acl;
 
 import com.zf.land.base.BaseApplication;
-import com.zf.land.utils.LogUtils;
+import com.zf.land.comm.utils.LogUtils;
 
 /**
  * @author: wang.xiaotong

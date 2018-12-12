@@ -7,9 +7,9 @@ import android.content.Intent;
 
 import com.zf.land.R;
 import com.zf.land.manager.XNotificationManager;
-import com.zf.land.utils.LogUtils;
-import com.zf.land.utils.NetworkUtils;
-import com.zf.land.utils.ToastUtils;
+import com.zf.land.comm.utils.LogUtils;
+import com.zf.land.comm.utils.NetworkUtils;
+import com.zf.land.comm.utils.ToastUtils;
 
 
 /**

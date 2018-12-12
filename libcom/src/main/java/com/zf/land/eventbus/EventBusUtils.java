@@ -12,6 +12,11 @@ import org.greenrobot.eventbus.ThreadMode;
  * @github: https://github.com/zhufengi
  * @time: 2018/9/28
  * @description: eventbus的封装
+ * =============================================
+ * 下一步计划：
+ * 1、该页面销毁时，清除消息状态置为初始
+ *
+ * =============================================
  */
 public class EventBusUtils {
 
@@ -23,7 +28,11 @@ public class EventBusUtils {
 
     public  static EventBusUtils getInstance(){
         if (instance == null){
-            instance = new EventBusUtils();
+            synchronized (EventBusUtils.class){
+                if (instance == null){
+                    instance = new EventBusUtils();
+                }
+            }
         }
         return instance;
     }
@@ -44,7 +53,7 @@ public class EventBusUtils {
      * @param context
      */
     public void register(Context context){
-        if (!eventBus.isRegistered(context)){
+        if (!isRegister(context)){
             EventBus.getDefault().register(context);
         }
     }
