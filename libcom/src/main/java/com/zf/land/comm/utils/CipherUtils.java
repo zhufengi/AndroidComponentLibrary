@@ -2,11 +2,22 @@ package com.zf.land.comm.utils;
 
 import android.util.Base64;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.DigestInputStream;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * @author: wang.xiaotong
@@ -18,6 +29,8 @@ import java.security.NoSuchAlgorithmException;
 public class CipherUtils {
 
     private static final char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    /**算法*/
+    private static final String ALGORITHMSTR = "AES/ECB/PKCS5Padding";
 
     private CipherUtils(){
         throw new UnsupportedOperationException("cannot be instantiated");
@@ -174,4 +187,138 @@ public class CipherUtils {
         }
         return result;
     }
+
+    /**
+     * AES加密
+     * @param content 待加密的内容
+     * @param encryptKey 加密密钥
+     * @return 加密后的byte[]
+     * @throws Exception
+     */
+    public static byte[] aesEncryptToBytes(String content, String encryptKey) throws Exception {
+        KeyGenerator kgen = KeyGenerator.getInstance("AES");
+        kgen.init(256);
+        Cipher cipher = Cipher.getInstance(ALGORITHMSTR);
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptKey.getBytes(), "AES"));
+
+        return cipher.doFinal(content.getBytes("utf-8"));
+    }
+
+    /**
+     * AES解密
+     * @param encryptBytes 待解密的byte[]
+     * @param decryptKey 解密密钥
+     * @return 解密后的String
+     * @throws Exception
+     */
+    public static String aesDecryptByBytes(byte[] encryptBytes, String decryptKey) throws Exception {
+        KeyGenerator kgen = KeyGenerator.getInstance("AES");
+        kgen.init(128);
+
+        Cipher cipher = Cipher.getInstance(ALGORITHMSTR);
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(decryptKey.getBytes(), "AES"));
+        byte[] decryptBytes = cipher.doFinal(encryptBytes);
+
+        return new String(decryptBytes);
+    }
+
+
+    /**
+     * RSA-生成密钥对
+     * @param keyLength
+     * @return
+     * @throws Exception
+     */
+    public static KeyPair getRSAKeyPair(int keyLength) throws Exception{
+        KeyPairGenerator keyPairGenerator=KeyPairGenerator.getInstance("RSA");
+        keyPairGenerator.initialize(1024);
+        return keyPairGenerator.generateKeyPair();
+    }
+
+    /**
+     * RSA-公钥加密
+     * @param content
+     * @param publicKey
+     * @return
+     * @throws Exception
+     */
+    public static byte[] rsaEncrypt(byte[] content, PublicKey publicKey) throws Exception{
+        Cipher cipher=Cipher.getInstance("RSA");//java默认"RSA"="RSA/ECB/PKCS1Padding"
+        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+        return cipher.doFinal(content);
+    }
+
+
+    /**
+     * RSA-私钥解密
+     * @param content
+     * @param privateKey
+     * @return
+     * @throws Exception
+     */
+    public static byte[] rsaDecrypt(byte[] content, PrivateKey privateKey) throws Exception{
+        Cipher cipher=Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, privateKey);
+        return cipher.doFinal(content);
+    }
+
+    /**
+     * SHA-512 加密 （不可逆-安全散列算法）
+     * @param data
+     * @return
+     */
+    public static String sha512Encrypt(byte[] data) {
+        MessageDigest sha = null;
+        try {
+            sha = MessageDigest.getInstance("SHA-512");
+            sha.update(data);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        byte[] resultBytes = sha.digest();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < resultBytes.length; i++) {
+            if (Integer.toHexString(0xFF & resultBytes[i]).length() == 1) {
+                builder.append("0").append(
+                        Integer.toHexString(0xFF & resultBytes[i]));
+            } else {
+                builder.append(Integer.toHexString(0xFF & resultBytes[i]));
+            }
+        }
+        return builder.toString();
+    }
+    /*
+     * 3des-生成密钥(进行了三重DES加密的算法，对称加密算法)
+     */
+    public static byte[] des3InitKey() throws NoSuchAlgorithmException {
+        KeyGenerator keyGen = KeyGenerator.getInstance("DESede");
+        keyGen.init(168);  //112 168
+        SecretKey secretKey = keyGen.generateKey();
+        return secretKey.getEncoded();
+    }
+
+    /*
+     * 3DES 加密(进行了三重DES加密的算法，对称加密算法)
+     */
+    public static byte[] des3Encrypt(byte[] data, byte[] key) throws Exception {
+        SecretKey secretKey = new SecretKeySpec(key, "DESede");
+
+        Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        byte[] cipherBytes = cipher.doFinal(data);
+        return cipherBytes;
+    }
+
+    /*
+     * 3DES 解密
+     */
+    public static byte[] des3Decrypt(byte[] data, byte[] key) throws Exception {
+        SecretKey secretKey = new SecretKeySpec(key, "DESede");
+
+        Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        byte[] plainBytes = cipher.doFinal(data);
+        return plainBytes;
+    }
+
 }
