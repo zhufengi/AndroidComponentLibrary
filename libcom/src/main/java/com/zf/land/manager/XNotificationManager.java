@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
@@ -301,5 +302,28 @@ public class XNotificationManager extends ContextWrapper {
             remoteView.setTextViewText(R.id.tvIntent, intent);
         }
         return remoteView;
+    }
+
+    /**
+     * notification intent
+     * @param context
+     * @param cls
+     * @param requestCode
+     */
+    public PendingIntent onPendingIntent(Context context, Class<?> cls, int requestCode) {
+        Intent intent = new Intent(context, cls);
+        return PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
+    /**
+     * notification intent
+     * @param action
+     * @param context
+     * @param cls
+     * @param requestCode
+     */
+    public PendingIntent onPendingIntent(String action, Context context, Class<?> cls, int requestCode) {
+        Intent intent = new Intent(action);
+        return PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 }

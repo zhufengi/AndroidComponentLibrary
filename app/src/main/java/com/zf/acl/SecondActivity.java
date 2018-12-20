@@ -1,6 +1,7 @@
 package com.zf.acl;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.orhanobut.logger.Logger;
@@ -51,5 +52,10 @@ public class SecondActivity extends BaseActivity {
 
             }
         };
+    }
+
+    @Override
+    public int initView(@Nullable Bundle savedInstanceState) {
+        return 0;
     }
 }

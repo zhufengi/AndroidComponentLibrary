@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_trans_divider"
+    android:gravity="center_vertical">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:minHeight="@dimen/dp50"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="检查安全加密算法"
+            android:textColor="@color/text_color_hint"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_a0aab5"
+            android:layout_marginTop="@dimen/dp5"
+            android:visibility="gone"
+            android:textSize="@dimen/dp12" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_update_btn_bg"
+        android:padding="@dimen/dp5"
+        android:text="立即更新"
+        android:visibility="gone"
+        android:textColor="@color/text_color_hint"
+        android:textSize="@dimen/dp10" />
+
+</LinearLayout>

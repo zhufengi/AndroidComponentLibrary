@@ -3,6 +3,7 @@ package com.zf.acl;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.zf.land.app.AppInfo;
 import com.zf.land.comm.utils.LogUtils;
 
 public class LogUtilsActivity extends AppCompatActivity {
@@ -13,6 +14,8 @@ public class LogUtilsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_utils);
         test();
+        AppInfo.ProcessInfo runningAppProcessInfo = AppInfo.getRunningAppProcessInfo(this);
+        LogUtils.d(TAG,"runningAppProcessInfo ："+runningAppProcessInfo.toString());
     }
 
     private void test(){

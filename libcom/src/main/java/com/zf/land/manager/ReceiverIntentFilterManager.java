@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import com.zf.land.receiver.BootAndShutdownReceiver;
 import com.zf.land.receiver.ScreenUnlockReceiver;
 import com.zf.land.receiver.SdcardListenReceiver;
+import com.zf.land.receiver.SimStateReceiver;
 import com.zf.land.receiver.UserPresentReceiver;
 import com.zf.land.comm.utils.LogUtils;
 
@@ -22,50 +23,63 @@ public class ReceiverIntentFilterManager {
     private Context mContext;
     private IntentFilter mIntentFilter = null;
 
-    /**手机屏幕解锁监听*/
+    /**
+     * 手机屏幕解锁监听
+     */
     private UserPresentReceiver mUserPresentReceiver = null;
-    /**开关机监听*/
+    /**
+     * 开关机监听
+     */
     private BootAndShutdownReceiver mBootAndShutdownReceiver = null;
-    /**sdcard监听*/
+    /**
+     * sdcard监听
+     */
     private SdcardListenReceiver mSdcardListenReceiver = null;
-    /**屏幕解锁监听*/
+    /**
+     * 屏幕解锁监听
+     */
     private ScreenUnlockReceiver mScreenUnlockReceiver = null;
+    /**
+     * sim卡插拔监听
+     */
+    private SimStateReceiver mSimStateReceiver = null;
 
-    public void init(Context mContext){
+    public void init(Context mContext) {
         this.mContext = mContext;
         mUserPresentReceiver = new UserPresentReceiver();
         mBootAndShutdownReceiver = new BootAndShutdownReceiver();
         mSdcardListenReceiver = new SdcardListenReceiver();
         mScreenUnlockReceiver = new ScreenUnlockReceiver();
+        mSimStateReceiver = new SimStateReceiver();
     }
 
     /**
      * add UserPresentReceiver
      */
-    public void addUserPresentReceiver(){
+    public void addUserPresentReceiver() {
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(Intent.ACTION_USER_PRESENT);
         mIntentFilter.setPriority(Integer.MAX_VALUE);
         mContext.registerReceiver(mUserPresentReceiver, mIntentFilter);
-        LogUtils.i(TAG,"addUserPresentReceiver ...");
+        LogUtils.i(TAG, "addUserPresentReceiver ...");
     }
 
     /**
      * add BootAndShutdownReceiver
      */
-    public void addBootAndShutdownReceiver(){
+    public void addBootAndShutdownReceiver() {
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
         mIntentFilter.addAction(Intent.ACTION_SHUTDOWN);
         mIntentFilter.addAction(Intent.ACTION_REBOOT);
-        mContext.registerReceiver(mBootAndShutdownReceiver,mIntentFilter);
-        LogUtils.d(TAG,"addBootAndShutdownReceiver ...");
+        mContext.registerReceiver(mBootAndShutdownReceiver, mIntentFilter);
+        LogUtils.d(TAG, "addBootAndShutdownReceiver ...");
     }
 
     /**
      * add SdcardListenReceiver
      */
-    public void addSdcardListenReceiver(){
+    public void addSdcardListenReceiver() {
         mIntentFilter = new IntentFilter();
         // 设置最高优先级 
         mIntentFilter.setPriority(100);
@@ -92,17 +106,27 @@ public class ReceiverIntentFilterManager {
         // 必须添加，否则无法接收到广播
         mIntentFilter.addDataScheme("file");
         mContext.registerReceiver(mSdcardListenReceiver, mIntentFilter);
-        LogUtils.d(TAG,"addSdcardListenReceiver ...");
+        LogUtils.d(TAG, "addSdcardListenReceiver ...");
     }
 
     /**
      * add ScreenUnlockReceiver
      */
-    public void addScreenUnlockReceiver(){
+    public void addScreenUnlockReceiver() {
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         mIntentFilter.addAction(Intent.ACTION_SCREEN_ON);
-        mContext.registerReceiver(mScreenUnlockReceiver,mIntentFilter);
-        LogUtils.d(TAG,"addScreenUnlockReceiver ...");
+        mContext.registerReceiver(mScreenUnlockReceiver, mIntentFilter);
+        LogUtils.d(TAG, "addScreenUnlockReceiver ...");
+    }
+
+    /**
+     * add SimCardStateReceiver
+     */
+    public void addSimCardStateReceiver() {
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(SimStateReceiver.ACTION_SIM_STATE_CHANGED);
+        mContext.registerReceiver(mSimStateReceiver, mIntentFilter);
+        LogUtils.d(TAG, "addSimCardStateReceiver in");
     }
 }
