@@ -18,6 +18,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 
 /**
  * @author: wang.xiaotong
@@ -31,8 +32,21 @@ public class ConvertUtils {
 
     private static final char[] DIGITS_LOWER = {'0', '1', '2', '3', '4', '5',
             '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
     private static final char[] DIGITS_UPPER = {'0', '1', '2', '3', '4', '5',
             '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    /**
+     * KB与Byte的倍数
+     */
+    private static final int KB = 1024;
+    /**
+     * MB与Byte的倍数
+     */
+    public static final int MB = 1048576;
+    /**
+     * GB与Byte的倍数
+     */
+    public static final int GB = 1073741824;
 
     private ConvertUtils() {
         throw new UnsupportedOperationException("cannot be instantiated");
@@ -701,6 +715,16 @@ public class ConvertUtils {
     }
 
     /**
+     * inputStream转byteArr
+     *
+     * @param is 输入流
+     * @return 字节数组
+     */
+    public static byte[] inputStream2Bytes(InputStream is) {
+        return input2OutputStream(is).toByteArray();
+    }
+
+    /**
      * Output stream to bytes.
      *
      * @param out The output stream.
@@ -787,6 +811,53 @@ public class ConvertUtils {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     * inputStream转outputStream
+     *
+     * @param is 输入流
+     * @return outputStream子类
+     */
+    public static ByteArrayOutputStream input2OutputStream(InputStream is) {
+        if (is == null) {
+            return null;
+        }
+        try {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            byte[] b = new byte[KB];
+            int len;
+            while ((len = is.read(b, 0, KB)) != -1) {
+                os.write(b, 0, len);
+            }
+            return os;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            FileUtils.closeIO(is);
+        }
+    }
+
+    /**
+     * 字节数转合适大小
+     * <p>保留3位小数</p>
+     *
+     * @param byteNum 字节数
+     * @return 1...1024 unit
+     */
+    public static String byte2FitSize(long byteNum) {
+        if (byteNum < 0) {
+            return "shouldn't be less than zero!";
+        } else if (byteNum < KB) {
+            return String.format(Locale.getDefault(), "%.3fB", (double) byteNum);
+        } else if (byteNum < MB) {
+            return String.format(Locale.getDefault(), "%.3fKB", (double) byteNum / KB);
+        } else if (byteNum < GB) {
+            return String.format(Locale.getDefault(), "%.3fMB", (double) byteNum / MB);
+        } else {
+            return String.format(Locale.getDefault(), "%.3fGB", (double) byteNum / GB);
         }
     }
 

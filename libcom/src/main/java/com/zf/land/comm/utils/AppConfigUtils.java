@@ -1,5 +1,6 @@
 package com.zf.land.comm.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -10,6 +11,7 @@ import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -314,5 +316,65 @@ public class AppConfigUtils {
             context.startActivity(new Intent(context.getPackageManager().getLaunchIntentForPackage(packagename)));
         }
 
+    }
+
+    /**
+     * 安装App(支持7.0)
+     *
+     * @param context  上下文
+     * @param filePath 文件路径
+     */
+    public static void installApp(Context context, String filePath) {
+        context.startActivity(IntentUtils.getInstallAppIntent(context, filePath));
+    }
+
+    /**
+     * 安装App（支持7.0）
+     *
+     * @param context 上下文
+     * @param file    文件
+     */
+    public static void installApp(Context context, File file) {
+        if (!RxFileTool.isFileExists(file)) return;
+        installApp(context, file.getAbsolutePath());
+    }
+
+    /**
+     * 安装App（支持7.0）
+     *
+     * @param activity    activity
+     * @param filePath    文件路径
+     * @param requestCode 请求值
+     */
+    public static void installApp(Activity activity, String filePath, int requestCode) {
+        activity.startActivityForResult(IntentUtils.getInstallAppIntent(activity, filePath), requestCode);
+    }
+
+    /**
+     * 安装App(支持7.0)
+     *
+     * @param activity    activity
+     * @param file        文件
+     * @param requestCode 请求值
+     */
+    public static void installApp(Activity activity, File file, int requestCode) {
+        if (!FileUtils.isFileExists(file)) return;
+        installApp(activity, file.getAbsolutePath(), requestCode);
+    }
+
+    /**
+     * 静默安装App
+     * <p>非root需添加权限 {@code <uses-permission android:name="android.permission.INSTALL_PACKAGES" />}</p>
+     *
+     * @param context  上下文
+     * @param filePath 文件路径
+     * @return {@code true}: 安装成功<br>{@code false}: 安装失败
+     */
+    public static boolean installAppSilent(Context context, String filePath) {
+        File file = RxFileTool.getFileByPath(filePath);
+        if (!RxFileTool.isFileExists(file)) return false;
+        String command = "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm install " + filePath;
+        RxShellTool.CommandResult commandResult = RxShellTool.execCmd(command, !isSystemApp(context), true);
+        return commandResult.successMsg != null && commandResult.successMsg.toLowerCase().contains("success");
     }
 }
